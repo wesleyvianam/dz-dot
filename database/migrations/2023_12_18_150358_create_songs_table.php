@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('birthdays', function (Blueprint $table) {
+        Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 60);
-            $table->integer('idade')->nullable();
-            $table->date('birthday');
+            $table->string('interpreter', 60);
+            $table->integer('times')->nullable();
+            $table->date('last_data');
             $table->string('description', 255)->nullable();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('relative_id');
+            $table->foreignId('category_id');
 
             $table->timestamps();
         });

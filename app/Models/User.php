@@ -24,14 +24,14 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function relatives(): HasMany
+    public function categories(): HasMany
     {
-        return $this->hasMany(Relative::class);
+        return $this->hasMany(Category::class);
     }
 
-    public function birthdays(): HasMany
+    public function songs(): HasMany
     {
-        return $this->hasMany(Birthday::class);
+        return $this->hasMany(Song::class);
     }
 
     /**
