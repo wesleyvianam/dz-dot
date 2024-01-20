@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -37,16 +38,36 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'super' => 1,
         ]);
+
+        if ($user) {
+            $company = $this->createCompany($user, $request->company);
+
+            $user->update([
+                'company_id' => $company->id
+            ]);
+        }
 
         event(new Registered($user));
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    private function createCompany(User $user, string $nameCompany): Company
+    {
+        $company = Company::create([
+            'name' => $nameCompany,
+            'owner_id' => $user->id
+        ]);
+
+        return $company;
     }
 }
