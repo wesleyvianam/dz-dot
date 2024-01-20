@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -24,14 +25,14 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function categories(): HasMany
+    public function company(): BelongsTo
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Companies::class);
     }
 
-    public function songs(): HasMany
+    public function team(): BelongsTo
     {
-        return $this->hasMany(Song::class);
+        return $this->belongsTo(Team::class);
     }
 
     /**
