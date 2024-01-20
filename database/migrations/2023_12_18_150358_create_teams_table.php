@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('nome', 60);
             $table->string('description', 200);
 
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
 
             $table->integer('manager_id');

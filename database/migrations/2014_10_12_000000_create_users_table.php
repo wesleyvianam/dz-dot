@@ -21,6 +21,7 @@ return new class extends Migration
             $table->rememberToken();
 
             $table->foreignId('company_id')->nullable();
+            $table->foreignId('team_id')->nullable();
 
             $table->timestamps();
         });
