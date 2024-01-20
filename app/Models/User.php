@@ -23,11 +23,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'super',
+        'team_id',
+        'company_id',
     ];
 
     public function company(): BelongsTo
     {
-        return $this->belongsTo(Companies::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function team(): BelongsTo

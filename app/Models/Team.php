@@ -26,7 +26,7 @@ class Team extends Model
 
     public function company(): BelongsTo
     {
-        return $this->belongsTo(Companies::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function manager(): BelongsTo
