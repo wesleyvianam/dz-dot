@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('songs', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 60);
-            $table->string('interpreter', 60);
-            $table->integer('times')->nullable();
-            $table->date('last_data');
-            $table->string('description', 255)->nullable();
+            $table->string('description', 200);
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id');
+
+            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+
+            $table->integer('manager_id');
+            $table->foreign('manager_id')->references('id')->on('users');
 
             $table->timestamps();
         });
