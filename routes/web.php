@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\TimesController;
+use App\Http\Controllers\WorkSettingsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -45,7 +46,7 @@ Route::middleware('auth')->group(callback: function () {
 
     Route::resource('/times', TimesController::class);
 
-    Route::resource('/settings', SettingsController::class);
+    Route::resource('/settings', WorkSettingsController::class);
 
     Route::resource('/members', MembersControllerAlias::class);
 });
