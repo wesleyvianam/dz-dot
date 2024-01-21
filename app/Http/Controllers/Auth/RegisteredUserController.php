@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\DailyWorkload;
 use App\Models\User;
+use App\Models\WorkSetting;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -42,6 +44,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'company_name' => $request->company,
             'super' => 1,
         ]);
 
@@ -67,6 +70,38 @@ class RegisteredUserController extends Controller
             'owner_id' => $user->id
         ]);
 
+        if ($company) {
+            $this->createWorkSettings($company);
+        }
+
         return $company;
+    }
+
+    private function createWorkSettings(Company $company): void
+    {
+        $workSetting = WorkSetting::create([
+            'company_id' => $company->id,
+            'workload' => 220,
+            'overtime' => 0
+        ]);
+
+        $days = [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+        ];
+
+        foreach ($days as $day) {
+            DailyWorkload::create([
+                'day' => $day,
+                'start' => '8:00',
+                'launch' => '11:30',
+                'back' => '12:30',
+                'end' => '18:00',
+                'work_setting_id' => $workSetting->id,
+            ]);
+        }
     }
 }
