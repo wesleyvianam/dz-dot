@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 60);
+            $table->string('name', 60);
             $table->string('description', 200);
 
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
 
-            $table->integer('manager_id');
+            $table->integer('manager_id')->nullable();
             $table->foreign('manager_id')->references('id')->on('users');
 
             $table->timestamps();
