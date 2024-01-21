@@ -33,10 +33,6 @@ export default function Authenticated({ user, header, children }) {
                                     Membros
                                 </NavLink>
 
-                                <NavLink href={route('times.index')} active={route().current('times.index')}>
-                                    Registrar Ponto
-                                </NavLink>
-
                                 <NavLink href={route('settings.index')} active={route().current('settings.index')}>
                                     Configurações
                                 </NavLink>
@@ -44,6 +40,10 @@ export default function Authenticated({ user, header, children }) {
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
+                            <a className="flex items-center bg-green-500 py-2 px-3 text-white rounded-lg" href={route('times.index')}>
+                                Registrar Ponto
+                            </a>
+
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -52,8 +52,10 @@ export default function Authenticated({ user, header, children }) {
                                                 type="button"
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
-                                                {user.name}
-
+                                                <span className="flex flex-col text-start">
+                                                    {user.name}
+                                                    <small>{user.company_name}</small>
+                                                </span>
                                                 <svg
                                                     className="ms-2 -me-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
