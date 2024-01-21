@@ -22,7 +22,23 @@ export default function Authenticated({ user, header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
+                                    Home
+                                </NavLink>
+
+                                <NavLink href={route('teams.index')} active={route().current('teams.index')}>
+                                    Equipes
+                                </NavLink>
+
+                                <NavLink href={route('members.index')} active={route().current('members.index')}>
+                                    Membros
+                                </NavLink>
+
+                                <NavLink href={route('times.index')} active={route().current('times.index')}>
+                                    Registrar Ponto
+                                </NavLink>
+
+                                <NavLink href={route('settings.index')} active={route().current('settings.index')}>
+                                    Configurações
                                 </NavLink>
                             </div>
                         </div>
@@ -112,12 +128,6 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
             </nav>
-
-            {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
 
             <main>{children}</main>
         </div>
